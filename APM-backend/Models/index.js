@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+
 const dbConfig = require("../config.js");
 
 const { Sequelize, DataTypes, SequelizeScopeError } = require("sequelize");

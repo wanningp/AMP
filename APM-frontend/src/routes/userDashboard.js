@@ -9,10 +9,11 @@ export default class Dashboard extends Component {
   }
   componentDidMount() {
     const token = window.localStorage.getItem("token");
+    const backend_base_url = process.env.REACT_APP_BACKEND_APM_BASE_URL;
 
     axios
       .post(
-        "http://localhost:8000/auth/userDashboard",
+        `${backend_base_url}auth/userDashboard`,
         {},
         {
           headers: {

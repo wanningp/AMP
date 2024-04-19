@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const express = require("express"); //import the express dependency
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -7,7 +9,7 @@ const userJournalController = require("./Controllers/userJournalController");
 const db = require("./Models");
 const userJournalModel = require("./Models/userJournal.model");
 const BudgetModel = require("./Models/budget.model");
-
+console.log("hi" + process.env.REACT_APP_BACKEND_APM_BASE_URL);
 const app = express(); //Instantiate an express app, the main work horse of this server
 const port = process.env.PORT || 8000; //Save the port number where your server will be listening
 const path = require("path");

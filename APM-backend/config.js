@@ -1,9 +1,11 @@
+const dotenv = require("dotenv");
+
 module.exports = {
-  secret: "wanningp",
-  HOST: "localhost",
-  USER: "root",
-  PASSWORD: "Pwn14041998!",
-  DB: "apm",
+  secret: process.env.SECRET,
+  HOST: process.env.DB_HOST,
+  USER: process.env.DB_USERNAME,
+  PASSWORD: process.env.DB_PASSWORD,
+  DB: process.env.DB,
   dialect: "mysql",
   pool: {
     max: 5,

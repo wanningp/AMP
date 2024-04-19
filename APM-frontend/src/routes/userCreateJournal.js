@@ -7,15 +7,12 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 export default function CreateJournal() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  // const [token, setToken] = useState("");
   const [editorData, setEditorData] = useState("");
 
-  // useEffect(() => {
-  // Fetch token from your authentication mechanism (e.g., local storage, cookies, etc.)
+  const backend_base_url = process.env.REACT_APP_BACKEND_APM_BASE_URL;
+
   const token = localStorage.getItem("token");
   const user = localStorage.getItem("user");
-  // setToken(token);
-  // }, []); // Empty dependency array ensures this effect runs only once on component mount
 
   const cardStyle = {
     backgroundColor: "rgba(255, 255, 255, 0.7)",
@@ -32,7 +29,7 @@ export default function CreateJournal() {
     event.preventDefault();
     axios
       .post(
-        "http://localhost:8000/auth/userCreateJournal",
+        `${backend_base_url}auth/userCreateJournal`,
         { title: title, content: editorData, user_id: user },
         {
           headers: {
