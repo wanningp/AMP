@@ -19,7 +19,7 @@ class userJournalController {
         user_id: user_id,
         title: title,
       });
-      res.status(201).json(newEntry);
+      res.json({status:"201",entry:newEntry});
     } catch (error) {
       return res
         .status(500)

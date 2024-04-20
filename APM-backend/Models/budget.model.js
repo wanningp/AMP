@@ -22,9 +22,6 @@ module.exports = (sequelize, DataTypes, User) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    timestamps: true,
-    createdAt: "created_at",
-    updatedAt: "updated_at",
   });
   Budget.associate = (models) => {
     Budget.belongsTo(models.users, { foreignKey: "ID", as: "User" });

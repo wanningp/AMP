@@ -39,6 +39,15 @@ export default function CreateJournal() {
           },
         }
       )
+      .then((data)=>{
+        console.log(data);
+        if(data.data.status==201){
+          alert('Journal with Title: '+data.data.entry.title+" has been created");
+          window.location.reload();          
+        }else{
+          alert('Error: '+ data.data.message +" - "+data.data.error);
+        }
+      })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
