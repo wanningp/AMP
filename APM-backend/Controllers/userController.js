@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const config = require("../config.js");
 const jwt = require("jsonwebtoken");
 const Op = db.Sequelize.Op;
-// const User = require("../Models/user.model");
 
 class userController {
   static async checkUserExist(req, res) {

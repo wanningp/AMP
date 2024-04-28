@@ -1,4 +1,4 @@
-import React, { useState, Component, useNavigate } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import { Container, Col, Row, Button } from "react-bootstrap";
 
@@ -33,7 +33,6 @@ export default class Dashboard extends Component {
   }
 
   handleRouteChange = () => {
-    // Use this.props.history.push() to navigate
     window.location.href = "/userCreateJournal";
   };
 

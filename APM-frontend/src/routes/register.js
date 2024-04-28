@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Row, Col, Form, Alert } from "react-bootstrap";
+import { Card, Row, Col, Form } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
@@ -39,7 +39,7 @@ export default function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
       setConfirmPasswordError("- Passwords do not match");
       return;
     } else {
@@ -55,9 +55,8 @@ export default function Register() {
 
     alert(`Name:${name},Email:${email}`);
     const formData = { name, email, password };
-    console.log(formData);
     try {
-      const response = await axios.post("/api/users", formData, {
+      await axios.post("/api/users", formData, {
         headers: {
           "Content-Type": "application/json",
         },

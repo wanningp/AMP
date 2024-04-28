@@ -1,6 +1,29 @@
 const dotenv = require("dotenv");
 dotenv.config();
-const express = require("express"); //import the express dependency
+const express = require("express")
+const https = require('https')
+var http = require('http');
+
+const fs = require('fs')
+
+const path = require("path");
+const certPath = path.join(__dirname, '../certifications', 'server.crt');
+const certKeyPath = path.join(__dirname, '../certifications', 'server.key');
+
+const app = express();
+
+const PORT = 8001;
+const port = process.env.PORT||PORT;//Save the port number where your server will be listening
+ 
+https.createServer({
+  key: fs.readFileSync(certKeyPath),
+  cert: fs.readFileSync(certPath)
+}, app).listen(port);
+
+
+
+//import the express dependency
+
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const Sequelize = require("sequelize");
@@ -9,27 +32,14 @@ const userJournalController = require("./Controllers/userJournalController");
 const db = require("./Models");
 const userJournalModel = require("./Models/userJournal.model");
 const BudgetModel = require("./Models/budget.model");
-console.log("hi" + process.env.REACT_APP_BACKEND_APM_BASE_URL);
-const app = express(); //Instantiate an express app, the main work horse of this server
-const port = process.env.PORT || 8000; //Save the port number where your server will be listening
-const path = require("path");
 
-app.use(cors());
+
+ //Instantiate an expresss app, the main work horse of this server
+
+app.use(cors(['http://localhost:3000']));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(
-  "/css",
-  express.static(path.join(__dirname, "node_modules/bootstrap/dist/css"))
-);
-app.use(
-  "/js",
-  express.static(path.join(__dirname, "node_modules/bootstrap/dist/js"))
-);
-app.use(
-  "/js",
-  express.static(path.join(__dirname, "node_modules/jquery/dist"))
-);
 
 const Budget = BudgetModel(db.sequelize, Sequelize.DataTypes);
 const userJournal = userJournalModel(db.sequelize, Sequelize.DataTypes);
@@ -49,7 +59,3 @@ app.get("/api/checkUserExist/:email", userController.checkUserExist);
 app.post("/auth/userDashboard", userController.userDashboard);
 app.post("/auth/userCreateJournal", userJournalController.createJournalEntry);
 
-app.listen(port, () => {
-  //server starts listening for any attempts from a client to connect at port:{port}
-  console.log(`Now listening on port ${port}`);
-});

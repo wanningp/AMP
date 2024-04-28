@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Card, Row, Col, Form } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-
-import PropTypes from "prop-types";
-import axios from "axios";
 import { Button } from "react-bootstrap";
-const backend_base_url = process.env.REACT_APP_BACKEND_APM_BASE_URL;
+import axios from "axios";
+
 export default function Login() {
   const cardStyle = {
     backgroundColor: "rgba(255, 255, 255, 0.7)", // The last value (0.5) represents the opacity (translucency)
@@ -16,6 +14,8 @@ export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [errorMessage, setErrorMessage] = useState();
+  const backend_base_url = process.env.REACT_APP_BACKEND_APM_BASE_URL;
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = { email, password };
@@ -27,24 +27,24 @@ export default function Login() {
         Accept: "application/json",
         "Access-Control-Allow-Origin": "",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify(formData),
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data, "signin");
-        if (data.status == "ok") {
+        // console.log(data, "signin");
+        if (data.status === "ok") {
           setErrorMessage("");
           alert("login success");
           window.localStorage.setItem("token", data.data);
           window.localStorage.setItem("user", data.user);
 
-          // window.localStorage.setItem("email", data.email);
           window.location.href = "./userDashboard";
         } else {
           setErrorMessage(`${data.message}`);
         }
       });
   };
+
   return (
     <Container className="p-3 ">
       <Row

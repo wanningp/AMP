@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Container, Row, Col, Form, Card, Button } from "react-bootstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -6,7 +6,6 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 export default function CreateJournal() {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
   const [editorData, setEditorData] = useState("");
 
   const backend_base_url = process.env.REACT_APP_BACKEND_APM_BASE_URL;
@@ -41,7 +40,7 @@ export default function CreateJournal() {
       )
       .then((data)=>{
         console.log(data);
-        if(data.data.status==201){
+        if(data.data.status===201){
           alert('Journal with Title: '+data.data.entry.title+" has been created");
           window.location.reload();          
         }else{

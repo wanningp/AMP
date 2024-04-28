@@ -5,12 +5,15 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import background from "./image/sign-up-page-4.jpg";
-import { BrowserRouter, Route, Routes, Link, Router } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Register from "./routes/register";
 import Login from "./routes/login";
 import Dashboard from "./routes/userDashboard";
 import CreateJournal from "./routes/userCreateJournal";
+import Collapsible from "./routes/test_files/test";
+import AccordianDiv from "./routes/test_files/accordian";
+
 
 export default function ControlledComponent() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,7 +38,6 @@ export default function ControlledComponent() {
       style={{
         backgroundImage: `url(${background})`,
         backgroundSize: "cover", // Adjust background image size
-        // backgroundPosition: "center",
         backgroundRepeat: "no-repeat", // Prevent image repetition
         backgroundColor: "blue", // You can use a color as a fallback
         minHeight: "100vh", // Set minimum height to 100vh
@@ -66,9 +68,11 @@ export default function ControlledComponent() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/userCreateJournal" element={<CreateJournal />} />
+          <Route path="/test" element={<Collapsible/>} />
+          <Route path="/accordian" element={<AccordianDiv />} />
+
         </Routes>
       </BrowserRouter>
-      {/* </div> */}
     </div>
   );
 }
