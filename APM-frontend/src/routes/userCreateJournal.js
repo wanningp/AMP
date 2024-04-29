@@ -3,10 +3,12 @@ import axios from "axios";
 import { Container, Row, Col, Form, Card, Button } from "react-bootstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateJournal() {
   const [title, setTitle] = useState("");
   const [editorData, setEditorData] = useState("");
+  let navigate=useNavigate();
 
   const backend_base_url = process.env.REACT_APP_BACKEND_APM_BASE_URL;
 
@@ -40,7 +42,7 @@ export default function CreateJournal() {
       )
       .then((data)=>{
         console.log(data);
-        if(data.data.status===201){
+        if(data.status===200){
           alert('Journal with Title: '+data.data.entry.title+" has been created");
           window.location.reload();          
         }else{
@@ -60,6 +62,7 @@ export default function CreateJournal() {
             <Row className="justify-content-center align-items-center">
               <Col className="text-center"></Col>
             </Row>
+            <Button onClick={()=>navigate(-1)} className="m-2">Back to Dashboard</Button>
             <Row className="text-center">
               <Form onSubmit={handleSubmit}>
                 <Card style={cardStyle} className="mt-2">
@@ -107,9 +110,7 @@ export default function CreateJournal() {
                 </Card>
                 <Button
                   className="m-2"
-                  type="submit"
-                  style={{ backgroundColor: "gray" }}
-                >
+                  type="submit">
                   Submit
                 </Button>
               </Form>

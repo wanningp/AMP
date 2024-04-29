@@ -19,28 +19,27 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = { email, password };
-    fetch(`${backend_base_url}api/auth/signin`, {
-      method: "POST",
-      crossDomain: true,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
+     axios
+      .post(
+        `${backend_base_url}api/auth/signin`,
+        JSON.stringify(formData),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((data) => {
-        // console.log(data, "signin");
-        if (data.status === "ok") {
+        console.log(data.data.status, "signin");
+        if (data.data.status === "ok") {
           setErrorMessage("");
           alert("login success");
-          window.localStorage.setItem("token", data.data);
-          window.localStorage.setItem("user", data.user);
+          window.localStorage.setItem("token", data.data.data);
+          window.localStorage.setItem("user", data.data.user);
 
           window.location.href = "./userDashboard";
         } else {
-          setErrorMessage(`${data.message}`);
+          setErrorMessage(`${data.data.message}`);
         }
       });
   };

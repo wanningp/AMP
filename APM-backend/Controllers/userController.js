@@ -45,6 +45,7 @@ class userController {
     try {
       const User = db.user;
       const user = await User.findOne({ where: { email: req.body.email } });
+      
       if (!user) {
         return res.status(404).send({ message: "User Not found." });
       }
