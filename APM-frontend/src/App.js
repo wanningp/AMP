@@ -5,14 +5,16 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import background from "./image/sign-up-page-4.jpg";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 
-import Register from "./routes/register";
-import Login from "./routes/login";
-import Dashboard from "./routes/userDashboard";
-import CreateJournal from "./routes/userCreateJournal";
+import Register from "./routes/pre_login/register";
+import Login from "./routes/pre_login/login";
+import Dashboard from "./routes/post_login/userDashboard";
+import CreateJournal from "./routes/post_login/userCreateJournal";
 import Collapsible from "./routes/test_files/test";
 import AccordianDiv from "./routes/test_files/accordian";
+import AllJournal from "./routes/post_login/allJournal";
+import AboutUs from "./routes/pre_login/about_us";
 
 
 export default function ControlledComponent() {
@@ -47,7 +49,7 @@ export default function ControlledComponent() {
       <>
         <Navbar bg="light" data-bs-theme="light">
           <Container>
-            <Navbar.Brand href="#home">AMP</Navbar.Brand>
+            <Navbar.Brand href={ isLoggedIn ? '/userDashboard' : '/login'}>AMP</Navbar.Brand>
             <Nav className="me-auto">
               {/* Conditionally render Logout link */}
               {isLoggedIn ? (
@@ -56,6 +58,8 @@ export default function ControlledComponent() {
                 <>
                   <Nav.Link href="register">Register</Nav.Link>
                   <Nav.Link href="login">Login</Nav.Link>
+                  <Nav.Link href="/">About Us</Nav.Link>
+                  
                 </>
               )}
             </Nav>
@@ -64,12 +68,15 @@ export default function ControlledComponent() {
       </>
       <BrowserRouter>
         <Routes>
-          <Route path="/userDashboard" element={<Dashboard />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/userCreateJournal" element={<CreateJournal />} />
+          <Route path="/" element={ isLoggedIn ? <Dashboard />:<AboutUs />} />
+          <Route path="/register" element={ <Register />} />
+          <Route path="/login" element={ <Login />} />
+          <Route path="/userDashboard" element={ <Dashboard />} />
+          <Route path="/journal/all" element={ <AllJournal />} />
+          <Route path="/userCreateJournal" element={ <CreateJournal />} />
           <Route path="/test" element={<Collapsible/>} />
           <Route path="/accordian" element={<AccordianDiv />} />
+          
 
         </Routes>
       </BrowserRouter>

@@ -60,5 +60,6 @@ app.post("/api/auth/signin", userController.loginUser);
 app.post("/api/users", userController.createUser);
 app.get("/api/checkUserExist/:email", userController.checkUserExist);
 
-app.post("/auth/userDashboard", userController.userDashboard);
-app.post("/auth/userCreateJournal", userJournalController.createJournalEntry);
+app.post("/api/userDashboard", userController.userDashboard);
+app.post("/api/userCreateJournal", userJournalController.createJournalEntry);
+app.get("/api/journal/all", userJournalController.seeAllJournalEntries);

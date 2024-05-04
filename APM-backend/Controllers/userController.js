@@ -62,7 +62,7 @@ class userController {
       }
       const token = jwt.sign(
         { id: user.id, email: user.email },
-        "RANDOM_TOKEN",
+        process.env.JWT_SECRET,
         {
           //   algorithm: "HS256",
           //   allowInsecureKeySizes: true,
@@ -88,7 +88,7 @@ class userController {
   static async userDashboard(req, res) {
     try {
       const token = await req.headers.authorization.split("Bearer ")[1];
-      const user = jwt.verify(token, "RANDOM_TOKEN");
+      const user = jwt.verify(token, process.env.JWT_SECRET);
       const useremail = user.email;
       console.log("User Email:", useremail);
       const data = await db.user
