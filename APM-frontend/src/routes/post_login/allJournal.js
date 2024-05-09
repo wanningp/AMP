@@ -1,6 +1,5 @@
 import React, { useState,useEffect, Component} from "react";
 import parse from 'html-react-parser';
-import axios from "axios";
 import { Button, Card, Col } from "react-bootstrap";
 import dateFormat from 'dateformat';
 import { Navigate, useNavigate } from "react-router";
