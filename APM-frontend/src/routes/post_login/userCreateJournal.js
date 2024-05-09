@@ -4,7 +4,6 @@ import { Container, Row, Col, Form, Card, Button } from "react-bootstrap";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useNavigate, Navigate } from "react-router-dom";
-import Forbidden from "../../components/403";
 import  "../../css/dev.css";
 
 export default function CreateJournal() {
