@@ -81,7 +81,6 @@ export default function Login() {
                       </Button>
                     </div>
                   </Form>
-                  
                 </Card.Body>
               </Card>
               <a className="mt-2" href="/register">Do not have an account? Register with us!</a>
