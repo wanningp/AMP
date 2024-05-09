@@ -76,8 +76,6 @@ export default function ControlledComponent() {
           <Route path="/userCreateJournal" element={ <CreateJournal />} />
           <Route path="/test" element={<Collapsible/>} />
           <Route path="/accordian" element={<AccordianDiv />} />
-          
-
         </Routes>
       </BrowserRouter>
     </div>
